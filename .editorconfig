@@ -1,0 +1,28 @@
+root = true
+
+[*]
+end_of_line = lf
+insert_final_newline = true
+indent_style = space
+trim_trailing_whitespace = true
+
+[*.{md,mdx}]
+trim_trailing_whitespace = false
+
+# YAML Files
+[*.{yml,yaml}]
+indent_size = 2
+end_of_line = crlf
+
+# Web Files
+[*.{js,json,ts,css}]
+indent_size = 2
+
+
+[*.cs]
+
+# CA1812: Program is an internal class that is apparently never instantiated. If so, remove the code from the assembly. If this class is intended to contain only static members, make it static (Shared in Visual Basic).
+dotnet_diagnostic.CA1812.severity = none
+
+# CA1848: Use the LoggerMessage delegates
+dotnet_diagnostic.CA1848.severity = none

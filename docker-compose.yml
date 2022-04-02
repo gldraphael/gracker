@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+
+  worker:
+    build:
+      dockerfile: ./apps/worker-app/Dockerfile
+    ports:
+      - "17701:80"
+
+  api:
+    build:
+      dockerfile: ./apps/api/Dockerfile
+    ports:
+      - "17702:80"
+
+  admin:
+    build:
+      dockerfile: ./apps/admin-app/Dockerfile
+    ports:
+      - "17703:80"
