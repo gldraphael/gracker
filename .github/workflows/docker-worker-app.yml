@@ -1,10 +1,10 @@
-name: Build gracker-admin-app
+name: Build gracker-worker-app
 
 on: push
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: gracker-admin-app
+  IMAGE_NAME: gracker-worker-app
 
 jobs:
   build-and-push-image:
@@ -34,7 +34,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./apps/admin-app/Dockerfile
+          file: ./apps/worker-app/Dockerfile
           push: false
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
