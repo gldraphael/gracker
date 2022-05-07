@@ -2,10 +2,27 @@
   "name": "grackerjs",
   "version": "0.1.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/gracker.js",
+  "types": "dist/gracker.d.ts",
+  "files": [
+    "/dist"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "serve": "serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gldraphael/gracker.git"
   },
   "author": "Galdin Raphael",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^13.0.2",
+    "ts-loader": "^9.3.0",
+    "typescript": "^4.6.4",
+    "webpack": "^5.72.0",
+    "webpack-cli": "^4.9.2"
+  }
 }
