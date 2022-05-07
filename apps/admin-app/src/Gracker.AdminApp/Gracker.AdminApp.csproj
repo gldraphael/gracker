@@ -6,4 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\libs\Gracker.ServiceShell\Gracker.ServiceShell.csproj" />
+  </ItemGroup>
+
 </Project>
