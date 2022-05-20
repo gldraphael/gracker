@@ -10,4 +10,8 @@
     <ProjectReference Include="..\..\..\..\libs\Gracker.ServiceShell\Gracker.ServiceShell.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.1" />
+  </ItemGroup>
+
 </Project>
