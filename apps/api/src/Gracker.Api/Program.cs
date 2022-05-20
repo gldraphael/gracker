@@ -1,3 +1,5 @@
+using Gracker.Api;
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -15,5 +17,7 @@ app.UseSwaggerUI(c =>
     c.DocumentTitle = "Gracker API";
     c.RoutePrefix = string.Empty;
 });
+
+app.MapEndpoints();
 
 app.Run();
