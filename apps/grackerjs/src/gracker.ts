@@ -24,7 +24,7 @@ async function getFingerprint() : Promise<string> {
 }
 
 async function sendEvent(bodyJson: string) {
-  const URL = 'http://localhost:17702/v1/events'
+  const URL = 'http://localhost:17702/v1/event'
 
   const response = await fetch(URL, {
     method: 'POST',

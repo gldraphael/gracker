@@ -4,7 +4,7 @@ public static class PostEvent
 {
     public static void Map(WebApplication app)
     {
-        app.MapPost("v1/events", (EventRequest body, HttpContext c) =>
+        app.MapPost("v1/event", (EventRequest body, HttpContext c) =>
         {
             var fingerprint = body.Fingerprint;
             var timezone = body.Timezone;
