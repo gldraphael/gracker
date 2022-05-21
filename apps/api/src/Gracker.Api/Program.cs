@@ -3,7 +3,10 @@ using Gracker.Api;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services.AddCors(o => o.AddDefaultPolicy(p => {
+    p.AllowAnyOrigin();
+    p.WithHeaders("Content-Type");
+}));
 
 
 var app = builder.Build();
@@ -18,6 +21,7 @@ app.UseSwaggerUI(c =>
     c.RoutePrefix = string.Empty;
 });
 
+app.UseCors();
 app.MapEndpoints();
 
 app.Run();
