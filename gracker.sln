@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30114.105
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "apps", "apps", "{3C68650C-1AA4-45A7-B285-1F4249F37666}"
 EndProject
@@ -9,31 +9,30 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "admin-app", "admin-app", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D1CBEE29-BA35-48B0-A1E9-5ADF3BAECE0B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gracker.AdminApp", "apps\admin-app\src\Gracker.AdminApp\Gracker.AdminApp.csproj", "{4516DB5D-3309-4220-A845-C4E3D1934FAC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gracker.AdminApp", "apps\admin-app\src\Gracker.AdminApp\Gracker.AdminApp.csproj", "{4516DB5D-3309-4220-A845-C4E3D1934FAC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "api", "api", "{FCF70237-2A40-42F9-A0AB-E01E0A360D13}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{01FF6ED4-9562-40CF-916B-CE2588C01860}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gracker.Api", "apps\api\src\Gracker.Api\Gracker.Api.csproj", "{E2692AB2-C840-4639-9084-738CB0E245ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gracker.Api", "apps\api\src\Gracker.Api\Gracker.Api.csproj", "{E2692AB2-C840-4639-9084-738CB0E245ED}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "worker-app", "worker-app", "{9B5148D6-6458-4A6D-BAE8-CFD5CAADC2A3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BA40D5B9-E74F-42AA-B0CB-74CCBC985FD0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gracker.WorkerApp", "apps\worker-app\src\Gracker.WorkerApp\Gracker.WorkerApp.csproj", "{5E9CC977-5612-400A-868D-1C530C2779BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gracker.WorkerApp", "apps\worker-app\src\Gracker.WorkerApp\Gracker.WorkerApp.csproj", "{5E9CC977-5612-400A-868D-1C530C2779BB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libs", "libs", "{C9316048-31D0-45E6-BEFE-0D91BC847783}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gracker.ServiceShell", "libs\Gracker.ServiceShell\Gracker.ServiceShell.csproj", "{210D3C57-139A-4A68-B7CA-D6EAB84D40B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gracker.ServiceShell", "libs\Gracker.ServiceShell\Gracker.ServiceShell.csproj", "{210D3C57-139A-4A68-B7CA-D6EAB84D40B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gracker.MessageContracts", "libs\Gracker.MessageContracts\Gracker.MessageContracts.csproj", "{F45970DA-B7EA-41FF-ABBD-87677099F0B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{4516DB5D-3309-4220-A845-C4E3D1934FAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -52,6 +51,13 @@ Global
 		{210D3C57-139A-4A68-B7CA-D6EAB84D40B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{210D3C57-139A-4A68-B7CA-D6EAB84D40B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{210D3C57-139A-4A68-B7CA-D6EAB84D40B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F45970DA-B7EA-41FF-ABBD-87677099F0B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F45970DA-B7EA-41FF-ABBD-87677099F0B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F45970DA-B7EA-41FF-ABBD-87677099F0B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F45970DA-B7EA-41FF-ABBD-87677099F0B1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{FDB18E39-B4A0-4C8D-A6CD-B646B404A32F} = {3C68650C-1AA4-45A7-B285-1F4249F37666}
@@ -64,5 +70,9 @@ Global
 		{BA40D5B9-E74F-42AA-B0CB-74CCBC985FD0} = {9B5148D6-6458-4A6D-BAE8-CFD5CAADC2A3}
 		{5E9CC977-5612-400A-868D-1C530C2779BB} = {BA40D5B9-E74F-42AA-B0CB-74CCBC985FD0}
 		{210D3C57-139A-4A68-B7CA-D6EAB84D40B3} = {C9316048-31D0-45E6-BEFE-0D91BC847783}
+		{F45970DA-B7EA-41FF-ABBD-87677099F0B1} = {C9316048-31D0-45E6-BEFE-0D91BC847783}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4AA716A7-3830-466F-A406-9E7EA8E19208}
 	EndGlobalSection
 EndGlobal

@@ -1,15 +1,19 @@
-﻿namespace Gracker.Api.Endpoints;
+﻿using Gracker.MessageContracts;
+using MassTransit;
+using Microsoft.AspNetCore.Mvc;
+
+namespace Gracker.Api.Endpoints;
 
 public static class PostEvent
 {
     public static void Map(WebApplication app)
     {
-        app.MapPost("v1/event", (EventRequest body, HttpContext c) =>
+        app.MapPost("v1/event", async ([FromBody]EventRequest body, HttpContext c, [FromServices] IBus bus) =>
         {
             var fingerprint = body.Fingerprint;
             var timezone = body.Timezone;
 
-            var timestamp = DateTimeOffset.UtcNow;
+            var timestamp = DateTime.UtcNow;
 
             var ipAddress = c.Connection.RemoteIpAddress;
             var acceptLanguage = c.Request.Headers.AcceptLanguage;
@@ -21,7 +25,14 @@ public static class PostEvent
                 ipAddress,
                 fingerprint,
                 timestamp);
-            
+
+            await bus.Publish<EventReceived>(new(
+                TimestampUtc: timestamp,
+                Fingerprint: fingerprint,
+                Timezone: timezone,
+                IPAddress: ipAddress
+            )).ConfigureAwait(false);
+
             return Results.Accepted();
         });
     }

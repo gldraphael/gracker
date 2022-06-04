@@ -5,17 +5,23 @@ services:
   worker:
     build:
       dockerfile: ./apps/worker-app/Dockerfile
+    environment:
+      - "Logging__Console__FormatterName=Simple"
     ports:
       - "17701:80"
 
   api:
     build:
       dockerfile: ./apps/api/Dockerfile
+    environment:
+      - "Logging__Console__FormatterName=Simple"
     ports:
       - "17702:80"
 
   admin:
     build:
       dockerfile: ./apps/admin-app/Dockerfile
+    environment:
+      - "Logging__Console__FormatterName=Simple"
     ports:
       - "17703:80"
