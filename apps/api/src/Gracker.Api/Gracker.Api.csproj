@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\libs\Gracker.MessageContracts\Gracker.MessageContracts.csproj" />
     <ProjectReference Include="..\..\..\..\libs\Gracker.ServiceShell\Gracker.ServiceShell.csproj" />
   </ItemGroup>
 

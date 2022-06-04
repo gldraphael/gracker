@@ -26,3 +26,14 @@ dotnet_diagnostic.CA1812.severity = none
 
 # CA1848: Use the LoggerMessage delegates
 dotnet_diagnostic.CA1848.severity = none
+
+
+# CA1062: Validate arguments of public methods
+# Justification:
+# Since,
+#  * Nullable reference is enabled on the project
+#  * Warnings are treated as errors
+#  * No code in this repo is meant for public consumption
+# non-nullable arguments of public methods will never be null
+# and nullable arguements will always be checked before use
+dotnet_diagnostic.CA1062.severity = none
