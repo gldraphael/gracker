@@ -4,15 +4,15 @@ EXPOSE 80
 EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
-WORKDIR /src
+WORKDIR /repo
 COPY global.json Directory.Build.props .editorconfig ./
-COPY apps/admin-app/src/Gracker.AdminApp/Gracker.AdminApp.csproj Gracker.AdminApp/
-RUN dotnet restore Gracker.AdminApp/Gracker.AdminApp.csproj
-COPY apps/admin-app/src/Gracker.AdminApp/ ./Gracker.AdminApp/
-WORKDIR /src/Gracker.AdminApp
-RUN dotnet build "Gracker.AdminApp.csproj" -c Release -o /app/build
+COPY libs/                                           libs/
+COPY apps/admin-app/src/Gracker.AdminApp/Gracker.AdminApp.csproj apps/admin-app/src/Gracker.AdminApp/
+RUN dotnet restore apps/admin-app/src/Gracker.AdminApp/Gracker.AdminApp.csproj
+COPY apps/admin-app/src/Gracker.AdminApp/            apps/admin-app/src/Gracker.AdminApp/
 
 FROM build AS publish
+WORKDIR /repo/apps/admin-app/src/Gracker.AdminApp/
 RUN dotnet publish "Gracker.AdminApp.csproj" -c Release -o /app/publish
 
 FROM base AS final

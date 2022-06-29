@@ -5,8 +5,10 @@ services:
   worker:
     build:
       dockerfile: ./apps/worker-app/Dockerfile
+      context: .
     environment:
       - "Logging__Console__FormatterName=Simple"
+      - "Messaging__Host=host.docker.internal"
     ports:
       - "17701:80"
 
@@ -15,13 +17,16 @@ services:
       dockerfile: ./apps/api/Dockerfile
     environment:
       - "Logging__Console__FormatterName=Simple"
+      - "Messaging__Host=host.docker.internal"
     ports:
       - "17702:80"
 
   admin:
     build:
       dockerfile: ./apps/admin-app/Dockerfile
+      context: .
     environment:
       - "Logging__Console__FormatterName=Simple"
+      - "Messaging__Host=host.docker.internal"
     ports:
       - "17703:80"
