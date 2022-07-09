@@ -18,6 +18,10 @@ services:
     environment:
       - "Logging__Console__FormatterName=Simple"
       - "Messaging__Host=host.docker.internal"
+      - "Db__Host=host.docker.internal:17753"
+      - "Db__Database=gracker"
+      - "Db__Username=admin"
+      - "Db__Password=admin123"
     ports:
       - "17702:80"
 

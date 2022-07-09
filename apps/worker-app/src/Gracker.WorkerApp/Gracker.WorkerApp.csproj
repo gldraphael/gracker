@@ -8,6 +8,14 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\libs\Gracker.ServiceShell\Gracker.ServiceShell.csproj" />
+    <ProjectReference Include="..\Gracker.WorkerApp.Infrastructure.Data\Gracker.WorkerApp.Infrastructure.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.5">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
 
 </Project>
