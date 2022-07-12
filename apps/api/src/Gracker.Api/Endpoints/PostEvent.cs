@@ -37,5 +37,5 @@ public static class PostEvent
         });
     }
 
-    private record EventRequest(string Fingerprint, string Timezone);
+    internal record EventRequest(string Fingerprint, string Timezone);
 }
