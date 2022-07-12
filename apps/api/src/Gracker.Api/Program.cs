@@ -8,7 +8,7 @@ builder.Services.AddCors(o => o.AddDefaultPolicy(p => {
     p.AllowAnyOrigin();
     p.WithHeaders("Content-Type");
 }));
-builder.Services.AddMassTransit(builder.Configuration);
+builder.SetupGrackerService();
 
 var app = builder.Build();
 
