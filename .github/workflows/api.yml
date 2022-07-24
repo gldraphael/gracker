@@ -33,6 +33,7 @@ jobs:
 
 
   build-and-push-image:
+    needs: run-tests
     runs-on: ubuntu-latest
     permissions:
       contents: read
