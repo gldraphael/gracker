@@ -4,8 +4,34 @@ on: push
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: gracker-api
+  DOCKERFILE_PATH: ./apps/api/Dockerfile
+  DOTNET_VERSION: 6.0.302
+  TESTS_PROJ_PATH: ./apps/api/tests/Gracker.Api.Tests/Gracker.Api.Tests.csproj
 
 jobs:
+
+  run-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+
+    - name: Install dependencies
+      run: dotnet restore ${{ env.TESTS_PROJ_PATH }}
+
+    - name: Build
+      run: dotnet build --configuration Release --no-restore ${{ env.TESTS_PROJ_PATH }}
+
+    - name: Test
+      run: dotnet test --no-restore --verbosity normal ${{ env.TESTS_PROJ_PATH }}
+
+
   build-and-push-image:
     runs-on: ubuntu-latest
     permissions:
@@ -33,7 +59,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./apps/api/Dockerfile
+          file: ${{ env.DOCKERFILE_PATH }}
           push: false
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}

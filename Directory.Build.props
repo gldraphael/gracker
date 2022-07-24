@@ -18,8 +18,8 @@
     </AssemblyAttribute>
   </ItemGroup>
 
-  <PropertyGroup>
-    <RunSettingsFilePath>tests.runsettings</RunSettingsFilePath>
-  </PropertyGroup>
+  <!-- <PropertyGroup>
+    <RunSettingsFilePath>.runsettings</RunSettingsFilePath>
+  </PropertyGroup> -->
 
 </Project>
