@@ -1,5 +1,6 @@
 ﻿using Gracker.Api.Endpoints;
-using Microsoft.AspNetCore.Mvc.Testing;
+using Gracker.MessageContracts;
+using MassTransit.Testing;
 using System.Net.Http.Json;
 
 namespace Gracker.Api.Tests.Endpoints;
@@ -9,17 +10,20 @@ public class PostEvent_should : IClassFixture<ApiTestBed>
     [Fact]
     public async Task Return_2xx()
     {
-        using var client = api.CreateClient();
-        using var request = JsonContent.Create<PostEvent.EventRequest>(new(Fingerprint: "unique-0x", Timezone: ""));
+        using var request = JsonContent.Create<PostEvent.EventRequest>(new(Fingerprint: "unique-0x", Timezone: "Asia/Calcutta"));
         var response = await client.PostAsync("/v1/event", request);
 
         response.EnsureSuccessStatusCode();
+
+        (await harness.Published.Any<EventReceived>(x => true)).ShouldBeTrue(); ;
     }
 
 
-    readonly WebApplicationFactory<Program> api;
+    readonly HttpClient client;
+    readonly ITestHarness harness;
     public PostEvent_should(ApiTestBed fixture)
     {
-        api = fixture.Api;
+        client = fixture.HttpClient;
+        harness = fixture.Harness;
     }
 }

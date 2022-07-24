@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.Mvc.Testing;
-
 namespace Gracker.Api.Tests.Endpoints;
 
 public class RootUrl_should : IClassFixture<ApiTestBed>
@@ -7,16 +5,17 @@ public class RootUrl_should : IClassFixture<ApiTestBed>
     [Fact]
     public async Task Serve_swagger_files()
     {
-        var http = api.CreateClient();
         var response = await http.GetAsync("/");
 
         response.EnsureSuccessStatusCode();
-        Assert.Contains(expectedSubstring: "swagger", await response.Content.ReadAsStringAsync(), StringComparison.OrdinalIgnoreCase);
+
+        var responseContent = await response.Content.ReadAsStringAsync();
+        responseContent.ShouldContain(expected: "swagger");
     }
 
-    readonly WebApplicationFactory<Program> api;
+    readonly HttpClient http;
     public RootUrl_should(ApiTestBed fixture)
     {
-        api = fixture.Api;
+        http = fixture.HttpClient;
     }
 }
