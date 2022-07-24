@@ -1,6 +1,7 @@
 ﻿using MassTransit;
 using MassTransit.Testing;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Gracker.Api.Tests;
 
@@ -9,8 +10,9 @@ public class ApiTestBed : IDisposable
 
     private  WebApplicationFactory<Program> Api { get; }
 
-    public HttpClient HttpClient { get; }
-    public ITestHarness Harness { get; }
+    protected HttpClient HttpClient { get; }
+    protected ITestHarness Harness { get; }
+    protected IBus Bus { get; }
 
     public ApiTestBed()
     {
@@ -27,6 +29,7 @@ public class ApiTestBed : IDisposable
 
         HttpClient = Api.CreateClient();
         Harness = Api.Services.GetTestHarness();
+        Bus = Api.Services.GetRequiredService<IBus>();
     }
 
 
