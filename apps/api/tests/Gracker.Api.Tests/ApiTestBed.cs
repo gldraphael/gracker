@@ -1,19 +1,32 @@
-﻿using Microsoft.AspNetCore.Mvc.Testing;
+﻿using MassTransit;
+using MassTransit.Testing;
+using Microsoft.AspNetCore.Mvc.Testing;
 
 namespace Gracker.Api.Tests;
 
 public class ApiTestBed : IDisposable
 {
 
-    public WebApplicationFactory<Program> Api { get; }
+    private  WebApplicationFactory<Program> Api { get; }
+
+    public HttpClient HttpClient { get; }
+    public ITestHarness Harness { get; }
 
     public ApiTestBed()
     {
-        Api = new WebApplicationFactory<Program>();
-        Api.WithWebHostBuilder(builder =>
+#pragma warning disable CA2000 // Dispose objects before losing scope -- being done in Dispose(bool)
+        Api = new WebApplicationFactory<Program>().WithWebHostBuilder(builder =>
         {
-            // ... Configure test services
+            builder.ConfigureServices(services =>
+            {
+                services.AddMassTransitTestHarness();
+            });
         });
+#pragma warning restore CA2000 // Dispose objects before losing scope
+
+
+        HttpClient = Api.CreateClient();
+        Harness = Api.Services.GetTestHarness();
     }
 
 
@@ -29,6 +42,7 @@ public class ApiTestBed : IDisposable
         {
             if (disposing)
             {
+                HttpClient.Dispose();
                 Api.Dispose();
             }
             disposedValue = true;
