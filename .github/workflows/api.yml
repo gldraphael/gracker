@@ -1,0 +1,75 @@
+name: API
+on: push
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: gracker-api
+  DOCKERFILE_PATH: ./apps/api/Dockerfile
+  DOTNET_VERSION: 6.0.302
+  TESTS_PROJ_PATH: ./apps/api/tests/Gracker.Api.Tests/Gracker.Api.Tests.csproj
+
+jobs:
+
+  run-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+
+    - name: Install dependencies
+      run: dotnet restore ${{ env.TESTS_PROJ_PATH }}
+
+    - name: Build
+      run: dotnet build --configuration Release --no-restore ${{ env.TESTS_PROJ_PATH }}
+
+    - name: Run tests
+      run: dotnet test --no-restore --verbosity normal --logger "trx;logfilename=results.trx" ${{ env.TESTS_PROJ_PATH }}
+
+    - name: Test Report
+      uses: dorny/test-reporter@v1
+      if: always()
+      with:
+        name: API tests
+        path: "./apps/api/**/results.trx"
+        reporter: dotnet-trx
+        fail-on-error: true
+
+
+  build-and-push-image:
+    needs: run-tests
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@v1
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v3
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+
+      - name: Build Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ${{ env.DOCKERFILE_PATH }}
+          push: false
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
