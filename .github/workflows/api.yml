@@ -28,8 +28,17 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release --no-restore ${{ env.TESTS_PROJ_PATH }}
 
-    - name: Test
-      run: dotnet test --no-restore --verbosity normal ${{ env.TESTS_PROJ_PATH }}
+    - name: Run tests
+      run: dotnet test --no-restore --verbosity normal --logger "trx;logfilename=results.trx" ${{ env.TESTS_PROJ_PATH }}
+
+    - name: Test Report
+      uses: dorny/test-reporter@v1
+      if: always()
+      with:
+        name: API tests
+        path: "./apps/api/**/results.trx"
+        reporter: dotnet-trx
+        fail-on-error: true
 
 
   build-and-push-image:
