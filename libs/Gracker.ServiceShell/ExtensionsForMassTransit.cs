@@ -2,8 +2,8 @@
 using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
 using System.Reflection;
+using System.Text.Json.Serialization;
 
 namespace Gracker.ServiceShell;
 
@@ -36,21 +36,14 @@ public static class ExtensionsForMassTransit
                         h.Password(config.Password);
                     });
 
+                cfg.ConfigureJsonSerializerOptions(opts =>
+                {
+                    opts.Converters.Add(new JsonIPAddressConverter());
+                    opts.Converters.Add(new JsonIPEndPointConverter());
+                    return opts;
+                });
                 cfg.ConfigureEndpoints(context);
             });
-
-            // var isTestEnvironment = builder.Environment.IsEnvironment("Test");
-            //if (isTestEnvironment)
-            //{
-            //    x.UsingInMemory((context, cfg) =>
-            //    {
-            //        cfg.ConfigureEndpoints(context);
-            //    });
-            //}
-            //else
-            //{
-
-            //}
         });
     }
 }

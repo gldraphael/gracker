@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Macross.Json.Extensions" Version="3.0.0" />
     <PackageReference Include="MassTransit.RabbitMQ" Version="8.0.5" />
   </ItemGroup>
 

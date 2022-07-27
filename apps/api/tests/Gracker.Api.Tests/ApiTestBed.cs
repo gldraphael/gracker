@@ -1,6 +1,8 @@
 ﻿using MassTransit;
 using MassTransit.Testing;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.Extensions.DependencyInjection;
+using System.Text.Json.Serialization;
 
 namespace Gracker.Api.Tests;
 
@@ -9,8 +11,9 @@ public class ApiTestBed : IDisposable
 
     private  WebApplicationFactory<Program> Api { get; }
 
-    public HttpClient HttpClient { get; }
-    public ITestHarness Harness { get; }
+    protected HttpClient HttpClient { get; }
+    protected ITestHarness Harness { get; }
+    protected IBus Bus { get; }
 
     public ApiTestBed()
     {
@@ -19,7 +22,22 @@ public class ApiTestBed : IDisposable
         {
             builder.ConfigureServices(services =>
             {
-                services.AddMassTransitTestHarness();
+                services.AddMassTransitTestHarness(c =>
+                {
+
+                    // find a way to move this to service shell
+                    // but by conditionally taking a reference to MassTransit.Testing
+                    c.UsingInMemory((ctx, cfg) =>
+                    {
+                        cfg.ConfigureJsonSerializerOptions(opts =>
+                        {
+                            opts.Converters.Add(new JsonIPAddressConverter());
+                            opts.Converters.Add(new JsonIPEndPointConverter());
+                            return opts;
+                        });
+                        cfg.ConfigureEndpoints(ctx);
+                    });
+                });
             });
         });
 #pragma warning restore CA2000 // Dispose objects before losing scope
@@ -27,6 +45,7 @@ public class ApiTestBed : IDisposable
 
         HttpClient = Api.CreateClient();
         Harness = Api.Services.GetTestHarness();
+        Bus = Api.Services.GetRequiredService<IBus>();
     }
 
 
