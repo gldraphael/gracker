@@ -53,11 +53,11 @@ public class PostEvent_PublishMessage_should : ApiTestBed
 #pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
 
         // IP Address combinations
-        yield return new object[] { DateTime.UtcNow, "unique-1x", "Asia/Calcutta", IPAddress.Any };
-        yield return new object[] { DateTime.UtcNow, "unique-1x", "Asia/Calcutta", IPAddress.IPv6Any };
-        yield return new object[] { DateTime.UtcNow, "unique-1x", "Asia/Calcutta", IPAddress.Loopback };
-        yield return new object[] { DateTime.UtcNow, "unique-1x", "Asia/Calcutta", IPAddress.IPv6Loopback };
-        yield return new object[] { DateTime.UtcNow, "unique-1x", "Asia/Calcutta", IPAddress.Parse("66.249.79.96") };
-        yield return new object[] { DateTime.UtcNow, "unique-1x", "Asia/Calcutta", IPAddress.Parse("2001:4860:4801:44::ca:4b") };
+        yield return new object[] { DateTime.UtcNow, "unique-2x", "Asia/Calcutta", IPAddress.Any };
+        yield return new object[] { DateTime.UtcNow, "unique-3x", "Asia/Calcutta", IPAddress.IPv6Any };
+        yield return new object[] { DateTime.UtcNow, "unique-4x", "Asia/Calcutta", IPAddress.Loopback };
+        yield return new object[] { DateTime.UtcNow, "unique-5x", "Asia/Calcutta", IPAddress.IPv6Loopback };
+        yield return new object[] { DateTime.UtcNow, "unique-6x", "Asia/Calcutta", IPAddress.Parse("66.249.79.96") };
+        yield return new object[] { DateTime.UtcNow, "unique-7x", "Asia/Calcutta", IPAddress.Parse("2001:4860:4801:44::ca:4b") };
     }
 }
