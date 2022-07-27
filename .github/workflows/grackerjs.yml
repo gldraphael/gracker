@@ -1,4 +1,4 @@
-name: Build gracker.js
+name: gracker.js
 
 on: push
 

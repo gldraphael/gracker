@@ -1,4 +1,4 @@
-name: Build gracker-worker-app
+name: Worker App
 
 on: push
 
@@ -7,7 +7,7 @@ env:
   IMAGE_NAME: gracker-worker-app
 
 jobs:
-  build-and-push-image:
+  docker:
     runs-on: ubuntu-latest
     permissions:
       contents: read
