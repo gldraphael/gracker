@@ -26,6 +26,6 @@
     "webpack-dev-server": "^4.9.3"
   },
   "dependencies": {
-    "@fingerprintjs/fingerprintjs": "^3.3.3"
+    "@fingerprintjs/fingerprintjs": "^3.3.4"
   }
 }
