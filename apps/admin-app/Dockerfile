@@ -11,9 +11,20 @@ COPY apps/admin-app/src/Gracker.AdminApp/Gracker.AdminApp.csproj apps/admin-app/
 RUN dotnet restore apps/admin-app/src/Gracker.AdminApp/Gracker.AdminApp.csproj
 COPY apps/admin-app/src/Gracker.AdminApp/            apps/admin-app/src/Gracker.AdminApp/
 
+FROM node:lts-alpine AS spa-build
+ENV NODE_ENV production
+ENV BUILD_PATH /build
+WORKDIR /repo
+COPY .editorconfig apps/admin-app/src/gracker-admin-spa/package.json apps/admin-app/src/gracker-admin-spa/package-lock.json ./
+WORKDIR /repo/apps/admin-app/src/gracker-admin-spa
+RUN npm install
+COPY apps/admin-app/src/gracker-admin-spa /repo
+RUN npm run build
+
 FROM build AS publish
 WORKDIR /repo/apps/admin-app/src/Gracker.AdminApp/
 RUN dotnet publish "Gracker.AdminApp.csproj" -c Release -o /app/publish
+COPY --from=spa-build /build /app/publish/wwwroot/
 
 FROM base AS final
 WORKDIR /app
