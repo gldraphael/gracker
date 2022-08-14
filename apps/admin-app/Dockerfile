@@ -14,6 +14,7 @@ COPY apps/admin-app/src/Gracker.AdminApp/            apps/admin-app/src/Gracker.
 FROM node:lts-alpine AS spa-build
 ENV NODE_ENV production
 ENV BUILD_PATH /build
+ENV REACT_APP_API_BASE /api
 WORKDIR /repo
 COPY .editorconfig apps/admin-app/src/gracker-admin-spa/package.json apps/admin-app/src/gracker-admin-spa/package-lock.json ./
 WORKDIR /repo/apps/admin-app/src/gracker-admin-spa

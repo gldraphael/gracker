@@ -2,13 +2,22 @@ import { Component } from 'react'
 
 export class Dashboard extends Component {
 
-  RealTimeUsers = 1
+  constructor(props) {
+    super(props);
+    this.state = { activeUsers: 0 };
+  }
 
   render() {
     return (
-      <div class="flex items-center justify-center min-h-screen">
-        <p class="text-9xl font-bold">{this.RealTimeUsers}</p>
+      <div className="flex items-center justify-center min-h-screen">
+        <p className="text-9xl font-bold">{this.state.activeUsers}</p>
       </div>
     );
+  }
+
+  componentDidMount() {
+    fetch(`${process.env.REACT_APP_API_BASE}/active-users`)
+      .then(response => response.json())
+      .then(response => this.setState({ activeUsers: response.count }));
   }
 }
